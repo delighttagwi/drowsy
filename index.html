@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team AERVIX | Drowsy Sentry System</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root { 
+            --primary: #2c3e50; 
+            --secondary: #e74c3c; 
+            --whatsapp: #25d366; 
+            --bg: #f8f9fa; 
+        }
+        
+        body { 
+            font-family: 'Inter', system-ui, sans-serif; 
+            margin: 0; 
+            background: var(--bg); 
+            color: #333; 
+            overflow-x: hidden; 
+            scroll-behavior: smooth;
+        }
+        
+        /* Animations */
+        @keyframes pulse { 
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4); } 
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); } 
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); } 
+        }
+        
+        .reveal { 
+            opacity: 0; 
+            transform: translateY(30px); 
+            transition: all 0.8s ease-out; 
+        }
+        
+        .reveal.active { 
+            opacity: 1; 
+            transform: translateY(0); 
+        }
+
+        /* Layout */
+        header { 
+            background: linear-gradient(135deg, var(--primary), #1a252f); 
+            color: white; 
+            padding: 100px 20px; 
+            text-align: center; 
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%); 
+        }
+        
+        .container { 
+            max-width: 1100px; 
+            margin: -50px auto 50px; 
+            padding: 40px; 
+            background: white; 
+            border-radius: 15px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
+        }
+        
+        .quote-banner { 
+            background: var(--secondary); 
+            color: white; 
+            padding: 30px; 
+            border-radius: 10px; 
+            text-align: center; 
+            font-size: 1.4rem; 
+            font-style: italic; 
+            margin-bottom: 40px; 
+        }
+
+        /* Model Showcase Section */
+        .model-display {
+            text-align: center;
+            padding: 20px 0 40px 0;
+            margin-bottom: 40px;
+        }
+
+        .model-img {
+            width: 100%;
+            max-width: 850px;
+            border-radius: 15px;
+            border: 5px solid var(--primary);
+            box-shadow: 0 15px 45px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .model-img:hover {
+            transform: scale(1.01);
+        }
+        
+        /* Tech Grid */
+        .tech-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 25px; 
+            margin: 40px 0; 
+        }
+        
+        .tech-card { 
+            padding: 25px; 
+            border-radius: 12px; 
+            background: #fff; 
+            border: 1px solid #eee; 
+            border-top: 5px solid var(--secondary);
+            transition: 0.3s; 
+        }
+        
+        .tech-card:hover { 
+            transform: translateY(-5px); 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1); 
+        }
+        
+        /* Charts & Stats */
+        .stats-row { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 40px; 
+            align-items: center; 
+            padding: 40px 0; 
+        }
+        
+        .whatsapp-fixed { 
+            position: fixed; 
+            bottom: 30px; 
+            right: 30px; 
+            background: var(--whatsapp); 
+            color: white; 
+            padding: 15px 25px; 
+            border-radius: 50px; 
+            text-decoration: none; 
+            font-weight: bold; 
+            z-index: 100; 
+            animation: pulse 2s infinite; 
+            display: flex; 
+            align-items: center; 
+            gap: 10px; 
+        }
+        
+        h2 { 
+            color: var(--primary); 
+            border-bottom: 3px solid var(--secondary); 
+            display: inline-block; 
+            margin-bottom: 20px; 
+        }
+
+        footer { 
+            background: var(--primary); 
+            color: white; 
+            padding: 60px 20px; 
+            text-align: center; 
+        }
+
+        @media (max-width: 768px) {
+            .stats-row { grid-template-columns: 1fr; }
+            header { padding: 60px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1 style="font-size: 3.5rem; margin: 0;">TEAM AERVIX</h1>
+    <p style="font-size: 1.2rem; opacity: 0.9;">Revolutionizing Road Safety with Drowsy Sentry Technology</p>
+</header>
+
+<div class="container">
+    <div class="quote-banner reveal">
+        "Watching over you when fatigue takes the wheel."
+    </div>
+
+    <section id="model" class="reveal" style="text-align: center;">
+        <h2>System Prototype Model</h2>
+        <p>A comprehensive view of the AERVIX integrated hardware ecosystem and real-time data flow.</p>
+        <div class="model-display">
+            <img src="model.png" alt="AERVIX System Architecture Diagram" class="model-img">
+            <p style="margin-top: 15px; font-style: italic; color: #666;">Figure 1: High-level architecture featuring Raspberry Pi, Arduino, and SIM800L integration.</p>
+        </div>
+    </section>
+
+    <section id="architecture" class="reveal">
+        <h2>Technical Specifications</h2>
+        <p>Our foolproof system leverages industrial-grade hardware for multi-layered safety monitoring.</p>
+        
+        <div class="tech-grid">
+            <div class="tech-card">
+                <h3>Main Processor</h3>
+                <p><strong>Raspberry Pi 4:</strong> The central hub for real-time facial analysis. It calculates the Eye Aspect Ratio (EAR) to detect micro-sleeps instantly.</p>
+            </div>
+            <div class="tech-card">
+                <h3>Hardware Controller</h3>
+                <p><strong>Arduino Nano:</strong> Manages the sensor array and ignition relay. It handles high-speed execution of safety protocols and engine cut-offs.</p>
+            </div>
+            <div class="tech-card">
+                <h3>Communication</h3>
+                <p><strong>SIM800L GSM/GPS:</strong> Automates emergency notifications. In case of an incident, it broadcasts location data and video alerts to authorities.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="problem" class="reveal">
+        <h2>The Global Challenge</h2>
+        <div class="stats-row">
+            <div>
+                <p><strong>1.3 Million</strong> deaths occur globally every year due to road accidents. In India, over <strong>1.7 Lakh</strong> lives were lost in 2022 alone.</p>
+                <p>Research proves that accidents account for a <strong>3.14% loss of India's GDP</strong> (₹10.4 Lakh Crore) annually. AERVIX is designed to eliminate these preventable tragedies.</p>
+            </div>
+            <div style="background: #fdfdfd; padding: 20px; border-radius: 10px; border: 1px solid #eee;">
+                <canvas id="gdpChart"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <section id="cta" class="reveal" style="text-align: center; padding: 40px 0;">
+        <h2>Ready to Secure Your Fleet?</h2>
+        <p>Contact us for detailed technical quotations and bulk implementation.</p>
+        <a href="https://wa.me/918807190943?text=I%20am%20interested%20in%20the%20AERVIX%20Drowsy%20Sentry%20System" 
+           style="display: inline-block; background: var(--primary); color: white; padding: 18px 45px; border-radius: 8px; text-decoration: none; font-weight: bold; margin-top: 20px; font-size: 1.1rem;">
+           Request Quotation via WhatsApp
+        </a>
+    </section>
+</div>
+
+<a href="https://wa.me/918807190943" class="whatsapp-fixed">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="25" alt="WhatsApp">
+    <span>Chat Now: +91 88071 90943</span>
+</a>
+
+<footer>
+    <p>&copy; 2026 Team AERVIX | Advanced Road Safety Solutions</p>
+    <p style="font-size: 0.9rem; opacity: 0.7;">Project References: U.S. DOT HS 811 232 | IEEE Intelligent Transport Proceedings</p>
+</footer>
+
+<script>
+    // Scroll Reveal Script
+    const observerOptions = { threshold: 0.2 };
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Chart.js Configuration
+    const ctx = document.getElementById('gdpChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['GDP Economic Loss (Accidents)', 'India Total GDP'],
+            datasets: [{
+                data: [10.4, 331.03],
+                backgroundColor: ['#e74c3c', '#2c3e50'],
+                hoverOffset: 10,
+                borderWidth: 0
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { position: 'bottom', labels: { font: { size: 12 } } },
+                title: { display: true, text: 'Economic Impact in India (₹ Lakh Crores)', font: { size: 16 } }
+            }
+        }
+    });
+</script>
+
+</body>
+</html>
